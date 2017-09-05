@@ -12,8 +12,6 @@ import java.util.List;
 public class FlightRepository {
 
     private ArrayList<Flight> flights = new ArrayList<Flight>();
-    Date departureDate = new Date();
-
 
     public ArrayList<Flight> getFlights() {
         Flight flight1 = new Flight("F1", "HYD", "BLR", 5, "2017-09-05");

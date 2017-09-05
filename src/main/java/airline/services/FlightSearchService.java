@@ -20,12 +20,28 @@ public class FlightSearchService {
         List<Flight> flightsList = flightRepository.getFlights();
 
         return flightsList.stream()
-                .filter(x -> x.getSource().equals(searchCriteria.getSource()))
-                .filter(x -> x.getDestination().equals(searchCriteria.getDestination()))
-                .filter(x -> x.getAvailableSeats() >= searchCriteria.getNumberOfPassengers())
+                .filter(searchBySource(searchCriteria))
+                .filter(searchByDestination(searchCriteria))
+                .filter(searchByPassengers(searchCriteria))
                 .filter(x-> IsDepartureDateSpecified(searchCriteria.getDepartureDate()))
-                .filter(x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate()))
+                .filter(searchByDepartureDate(searchCriteria))
                 .collect(Collectors.toList());
+    }
+
+    public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria) {
+        return x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate());
+    }
+
+    public Predicate<Flight> searchByPassengers(SearchCriteria searchCriteria) {
+        return x -> x.getAvailableSeats() >= searchCriteria.getNumberOfPassengers();
+    }
+
+    public Predicate<Flight> searchByDestination(SearchCriteria searchCriteria) {
+        return x -> x.getDestination().equals(searchCriteria.getDestination());
+    }
+
+    public Predicate<Flight> searchBySource(SearchCriteria searchCriteria) {
+        return x -> x.getSource().equals(searchCriteria.getSource());
     }
     public boolean IsDepartureDateSpecified(String departureDate)
     {
