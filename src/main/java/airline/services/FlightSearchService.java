@@ -23,13 +23,13 @@ public class FlightSearchService {
                 .filter(searchBySource(searchCriteria))
                 .filter(searchByDestination(searchCriteria))
                 .filter(searchByPassengers(searchCriteria))
-                .filter(x-> IsDepartureDateSpecified(searchCriteria.getDepartureDate()))
                 .filter(searchByDepartureDate(searchCriteria))
                 .collect(Collectors.toList());
     }
 
-    public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria) {
-        return x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate());
+    public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria)
+    {
+       return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate()): x -> true;
     }
 
     public Predicate<Flight> searchByPassengers(SearchCriteria searchCriteria) {
