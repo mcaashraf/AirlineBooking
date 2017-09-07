@@ -7,24 +7,34 @@ public class SearchCriteria {
     private String destination;
     private int numberOfPassengers;
 
-    public String getDepartureDate() {
-        return departureDate;
-    }
-
     public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
     private String departureDate;
+    private String travelClass;
+
+    public void setTravelClass(String travelClass) {
+        this.travelClass = travelClass;
+    }
+
+    public String getTravelClass() {
+        return travelClass;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
 
     public SearchCriteria() {
     }
 
-    public SearchCriteria(String source, String destination, int numberOfPassengers,String departureDate) {
+    public SearchCriteria(String source, String destination, int numberOfPassengers,String departureDate,String travelClass) {
         this.source = source;
         this.destination = destination;
         this.numberOfPassengers = numberOfPassengers;
         this.departureDate=departureDate;
+        this.travelClass=travelClass;
     }
 
     public String getSource() {

@@ -10,10 +10,12 @@
     <thead>
     <tr>
         <th>Flight Id</th>
+        <th>Airplane Name</th>
         <th>Source</th>
         <th>Destination</th>
         <th>Available Seats</th>
         <th>Departure Date</th>
+        <th>Travel Class</th>
 
     </tr>
     </thead>
@@ -21,10 +23,12 @@
 
     <tr th:each="flight : ${searchResults}">
         <td th:text="${flight.flightNumber}"/>
+        <td th:text="${flight.getAirPlaneName()}"/>
         <td th:text="${flight.source}"/>
         <td th:text="${flight.destination}"/>
-        <td th:text="${flight.availableSeats}"/>
+        <td th:text="${flight.getSeatsByClass(searchCriteria.travelClass)}"/>
         <td th:text="${flight.departureDate}"/>
+        <td th:text="${searchCriteria.travelClass}"/>
     </tr>
     </tbody>
 </table>

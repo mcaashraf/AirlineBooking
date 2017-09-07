@@ -2,9 +2,12 @@ package airline.services;
 
 import airline.model.Flight;
 import airline.model.SearchCriteria;
+import airline.model.TravelClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -14,17 +17,22 @@ public class FlightSearchService {
     @Autowired
     FlightRepository flightRepository;
 
+    @Autowired
+    AirplaneRepository airplaneRepository;
 
     public List<Flight> search(SearchCriteria searchCriteria) {
         flightRepository = new FlightRepository();
+        airplaneRepository=new AirplaneRepository();
         List<Flight> flightsList = flightRepository.getFlights();
 
-        return flightsList.stream()
+       return flightsList.stream()
                 .filter(searchBySource(searchCriteria))
                 .filter(searchByDestination(searchCriteria))
-                .filter(searchByPassengers(searchCriteria))
+                .filter(searchByPassengersForClassType(searchCriteria))
                 .filter(searchByDepartureDate(searchCriteria))
                 .collect(Collectors.toList());
+
+
     }
 
     public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria)
@@ -32,8 +40,13 @@ public class FlightSearchService {
        return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate()): x -> true;
     }
 
-    public Predicate<Flight> searchByPassengers(SearchCriteria searchCriteria) {
-        return x -> x.getAvailableSeats() >= searchCriteria.getNumberOfPassengers();
+
+
+    public Predicate<Flight> searchByPassengersForClassType(SearchCriteria searchCriteria)
+    {
+
+        return x -> x.getSeatsByClass(TravelClass.valueOf(searchCriteria.getTravelClass())) >= searchCriteria.getNumberOfPassengers();
+
     }
 
     public Predicate<Flight> searchByDestination(SearchCriteria searchCriteria) {

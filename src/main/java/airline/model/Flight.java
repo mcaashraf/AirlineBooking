@@ -1,46 +1,27 @@
 package airline.model;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
-import java.util.Date;
+import airline.services.AirplaneRepository;
 
 public class Flight {
-    private String airPlaneId;
     private String flightNumber;
     private String source;
     private String destination;
-
     private String  departureDate;
+    private Airplane airplane;
+
+
+    AirplaneRepository airplaneRepository = new AirplaneRepository();
 
     public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(String departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public int getAvailableSeats() {
-        return availableSeats;
-    }
-
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
-    }
-
-    public int availableSeats;
-
-    public Flight() {
-    
-    }
-
-    public Flight(String flightNumber, String source, String destination,int availableSeats,String departureDate) {
+    public Flight() {  }
+    public Flight(String flightNumber, String source, String destination,String departureDate, String airplaneName) {
         this.flightNumber = flightNumber;
         this.source = source;
         this.destination = destination;
-        this.availableSeats=availableSeats;
         this.departureDate=departureDate;
+        this.airplane= airplaneRepository.getAirplaneByName(airplaneName);
     }
 
     public String getFlightNumber() {
@@ -65,5 +46,19 @@ public class Flight {
 
     public void setDestination(String destination) {
         this.destination = destination;
+
+    }
+
+    public int getSeatsByClass(TravelClass travelClass)
+    {
+        return airplane.getSeatsByClass(travelClass);
+    }
+
+    public String getAirPlaneName() {
+        return airplane.getAirPlaneName();
+    }
+
+    public int getSeatsByClass(String travelClass){
+        return getSeatsByClass(TravelClass.valueOf(travelClass));
     }
 }

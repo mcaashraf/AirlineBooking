@@ -1,44 +1,30 @@
 package airline.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Airplane {
 
-    public void Airplane(String airPlaneId, String airPlaneName, int totalCapacity)
+    private HashMap<TravelClass,Integer> seatsList;
+    private String airPlaneName;
+
+    public Airplane(String airPlaneName,HashMap<TravelClass,Integer> seatsList)
     {
-        this.airPlaneId = airPlaneId;
+
         this.airPlaneName = airPlaneName;
-        this.totalCapacity = totalCapacity;
+        this.seatsList=seatsList;
     }
-
-
-    public String getAirPlaneId()
-    {
-        return airPlaneId;
-    }
-
-    public void setAirPlaneId(String airPlaneId) {
-        this.airPlaneId = airPlaneId;
-    }
-
-    private String airPlaneId;
 
     public String getAirPlaneName() {
         return airPlaneName;
     }
 
-    public void setAirPlaneName(String airPlaneName) {
-        this.airPlaneName = airPlaneName;
+
+
+    public int getSeatsByClass(TravelClass travelClass)
+    {
+        return seatsList.get(travelClass);
     }
-
-    private String airPlaneName;
-
-    public int getTotalCapacity() {
-        return totalCapacity;
-    }
-
-    public void setTotalCapacity(int totalCapacity) {
-        this.totalCapacity = totalCapacity;
-    }
-
-    private int totalCapacity;
 
 }
