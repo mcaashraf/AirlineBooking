@@ -3,13 +3,15 @@ package airline.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Airplane {
 
-    private HashMap<TravelClass,Integer> seatsList;
+    private List<Seat> seatsList;
     private String airPlaneName;
 
-    public Airplane(String airPlaneName,HashMap<TravelClass,Integer> seatsList)
+
+    public Airplane(String airPlaneName,List<Seat> seatsList)
     {
 
         this.airPlaneName = airPlaneName;
@@ -20,11 +22,11 @@ public class Airplane {
         return airPlaneName;
     }
 
-
-
-    public int getSeatsByClass(TravelClass travelClass)
+    public Seat getSeatsByClass(TravelClass travelClass)
     {
-        return seatsList.get(travelClass);
+        return seatsList.stream()
+                .filter((seat -> seat.getTravelClass().equals(travelClass)))
+                .collect(Collectors.toList()).get(0);
     }
 
 }

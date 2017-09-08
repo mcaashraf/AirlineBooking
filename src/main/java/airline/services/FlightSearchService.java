@@ -37,7 +37,7 @@ public class FlightSearchService {
 
     public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria)
     {
-       return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? x -> x.getDepartureDate().equals(searchCriteria.getDepartureDate()): x -> true;
+       return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? flight -> flight.getDepartureDate().equals(searchCriteria.getDepartureDate()): flight -> true;
     }
 
 
@@ -45,16 +45,16 @@ public class FlightSearchService {
     public Predicate<Flight> searchByPassengersForClassType(SearchCriteria searchCriteria)
     {
 
-        return x -> x.getSeatsByClass(TravelClass.valueOf(searchCriteria.getTravelClass())) >= searchCriteria.getNumberOfPassengers();
+        return flight -> flight.getSeatsByClass(TravelClass.valueOf(searchCriteria.getTravelClass())) >= searchCriteria.getNumberOfPassengers();
 
     }
 
     public Predicate<Flight> searchByDestination(SearchCriteria searchCriteria) {
-        return x -> x.getDestination().equals(searchCriteria.getDestination());
+        return flight -> flight.getDestination().equals(searchCriteria.getDestination());
     }
 
     public Predicate<Flight> searchBySource(SearchCriteria searchCriteria) {
-        return x -> x.getSource().equals(searchCriteria.getSource());
+        return flight -> flight.getSource().equals(searchCriteria.getSource());
     }
     public boolean IsDepartureDateSpecified(String departureDate)
     {

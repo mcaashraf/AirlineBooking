@@ -16,6 +16,7 @@
         <th>Available Seats</th>
         <th>Departure Date</th>
         <th>Travel Class</th>
+        <th>Total Cost</th>
 
     </tr>
     </thead>
@@ -29,6 +30,7 @@
         <td th:text="${flight.getSeatsByClass(searchCriteria.travelClass)}"/>
         <td th:text="${flight.departureDate}"/>
         <td th:text="${searchCriteria.travelClass}"/>
+        <td th:text="${flight.getTotalCostOfBooking(searchCriteria.travelClass,searchCriteria.getNumberOfPassengers())}"/>
     </tr>
     </tbody>
 </table>

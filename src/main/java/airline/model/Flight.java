@@ -51,9 +51,19 @@ public class Flight {
 
     public int getSeatsByClass(TravelClass travelClass)
     {
-        return airplane.getSeatsByClass(travelClass);
+        return airplane.getSeatsByClass(travelClass).getAvailableSeats();
     }
 
+    public double getPriceByClass(TravelClass travelClass)
+    {
+        return airplane.getSeatsByClass(travelClass).getPrice();
+    }
+
+    public double getTotalCostOfBooking(String travelClass,int numberOfPassengers)
+    {
+
+        return (getPriceByClass(TravelClass.valueOf(travelClass)) * numberOfPassengers);
+    }
     public String getAirPlaneName() {
         return airplane.getAirPlaneName();
     }
