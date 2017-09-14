@@ -15,18 +15,18 @@ public class AirplaneRepository {
     public AirplaneRepository()
     {
         List<Seat> boeingSeatsF1 = new ArrayList<Seat>();
-        boeingSeatsF1.add(new Seat(TravelClass.Economy,6000,195,195));
+        boeingSeatsF1.add(new Seat(TravelClass.Economy,6000,195,95));
         boeingSeatsF1.add(new Seat(TravelClass.Business,13000,35,35));
         boeingSeatsF1.add( new Seat(TravelClass.First,20000,8,8));
         airPlanesList.put("Boeing777-200LR(77L)",boeingSeatsF1);
         List<Seat> boeingSeatsF2 = new ArrayList<Seat>();
-        boeingSeatsF2.add(new Seat(TravelClass.Economy,4000,144,144));
-        boeingSeatsF2.add(new Seat(TravelClass.Business,0,0,0));
+        boeingSeatsF2.add(new Seat(TravelClass.Economy,4000,144,10));
+        boeingSeatsF2.add(new Seat(TravelClass.Business,15000,0,0));
         boeingSeatsF2.add( new Seat(TravelClass.First,0,0,0));
         airPlanesList.put("AirBus-A319-V2",boeingSeatsF2);
         List<Seat> boeingSeatsF3 = new ArrayList<Seat>();
-        boeingSeatsF3.add(new Seat(TravelClass.Economy,4000,152,152));
-        boeingSeatsF3.add(new Seat(TravelClass.Business,0,20,20));
+        boeingSeatsF3.add(new Seat(TravelClass.Economy,4000,152,10));
+        boeingSeatsF3.add(new Seat(TravelClass.Business,12000,20,20));
         boeingSeatsF3.add( new Seat(TravelClass.First,0,0,0));
         airPlanesList.put("AirBus-A321",boeingSeatsF3);
     }

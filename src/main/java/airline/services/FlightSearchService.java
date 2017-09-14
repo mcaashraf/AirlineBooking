@@ -6,8 +6,6 @@ import airline.model.TravelClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -20,12 +18,12 @@ public class FlightSearchService {
     @Autowired
     AirplaneRepository airplaneRepository;
 
-    public List<Flight> search(SearchCriteria searchCriteria) {
+    public List<Flight> searchFlights(SearchCriteria searchCriteria) {
         flightRepository = new FlightRepository();
         airplaneRepository=new AirplaneRepository();
         List<Flight> flightsList = flightRepository.getFlights();
 
-       return flightsList.stream()
+        return flightsList.stream()
                 .filter(searchBySource(searchCriteria))
                 .filter(searchByDestination(searchCriteria))
                 .filter(searchByPassengersForClassType(searchCriteria))
@@ -37,7 +35,7 @@ public class FlightSearchService {
 
     public Predicate<Flight> searchByDepartureDate(SearchCriteria searchCriteria)
     {
-       return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? flight -> flight.getDepartureDate().equals(searchCriteria.getDepartureDate()): flight -> true;
+        return IsDepartureDateSpecified(searchCriteria.getDepartureDate()) ? flight -> flight.getDepartureDate().equals(searchCriteria.getDepartureDate()): flight -> true;
     }
 
 
@@ -45,7 +43,7 @@ public class FlightSearchService {
     public Predicate<Flight> searchByPassengersForClassType(SearchCriteria searchCriteria)
     {
 
-        return flight -> flight.getSeatsByClass(TravelClass.valueOf(searchCriteria.getTravelClass())) >= searchCriteria.getNumberOfPassengers();
+        return flight -> flight.getAvailableSeatsByClass(TravelClass.valueOf(searchCriteria.getTravelClass())) >= searchCriteria.getNumberOfPassengers();
 
     }
 

@@ -11,16 +11,16 @@
 <div class="container">
     <b><center th:text="'Welcome to TWAirline'"></center></b><hr/>
     <form method="post" action="#" th:action="@{/search}" th:object="${searchCriteria}">
-        <p th:text="'Source: '"/>
-        <select title="Source" class="form-control col-md-3" id="source" name="source" th:field="*{source}">
+        <b><p th:text="'Source: '"/></b>
+        <select title="Source" class="form-control col-md-3" id="source" name="source" th:field="*{source}" th:required="required">
             <option value="">Select Source</option>
             <option th:each="city : ${cities}"
                     th:value="${city.id}"
                     th:text="${city.name}">
             </option>
         </select><br/>
-        <p th:text="'Destination: '"/>
-        <select class="form-control col-md-3" id="destination" name="destination" th:field="*{destination}">
+        <b><p th:text="'Destination: '"/></b>
+        <select class="form-control col-md-3" id="destination" name="destination" th:field="*{destination}" th:required="required">
             <option value="">Select Destination</option>
             <option th:each="city : ${cities}"
                     th:value="${city.id}"
@@ -29,24 +29,24 @@
             </option>
         </select><br/>
 
-        <p th:text="'Number of passengers: '"/>
+        <b><p th:text="'Number of passengers: '"/></b>
 
         <input type="number" class="form-control col-md-3" name="numberOfPassengers" min="1" th:field="*{numberOfPassengers}"/><br/>
 
-        <p th:text="'Departure Date: '"/>
+        <b><p th:text="'Departure Date: '"/></b>
         <input type="date" class="form-control col-md-3" name="departureDate" th:field="*{departureDate}"/><br/>
 
 
-        <p th:text="'Travel Class: '"/>
-        <select title="TravelClass" class="form-control col-md-3" id="travelClass" name="travelClass" th:field="*{travelClass}">
-            <option value="">Select Travel Class</option>
+        <b><p th:text="'Travel Class: '"/></b>
+        <select title="TravelClass" class="form-control col-md-3" id="travelClass" name="travelClass" th:field="*{travelClass}" th:required="required">
+           <option  value="">Select Travel Class</option>
             <option th:each="travelClassType : ${travelClassTypes}"
                     th:value="${travelClassType}"
                     th:text="${travelClassType}">
             </option>
-        </select><br/>
+       </select><br/>
 
-        <button type="submit" class="btn btn-primary">Search</button>
+        <b><button type="submit" class="btn btn-primary">Search</button></b>
     </form>
 </div>
 </body>

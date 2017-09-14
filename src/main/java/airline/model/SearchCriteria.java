@@ -1,7 +1,5 @@
 package airline.model;
 
-import java.util.Date;
-
 public class SearchCriteria {
     private String source;
     private String destination;
